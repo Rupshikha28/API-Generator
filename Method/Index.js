@@ -68,7 +68,7 @@ export default class ParentController {
    */
   #rightItemRemove(e) {
     const item = e.target;
-    this.#addItemToLeftConatiner(item);
+    this.#addItemToLeftContainer(item);
     item.remove();
   }
 
@@ -78,7 +78,7 @@ export default class ParentController {
    * @description Clone a Node and append this Node to the <uI> element of Left container
    */
 
-  #addItemToLeftConatiner(item) {
+  #addItemToLeftContainer(item) {
     const leftUl = document.getElementById("left_ul");
     let clonenode = item.cloneNode(true);
     clonenode.className = "displayitem";
@@ -106,7 +106,7 @@ export default class ParentController {
    */
   #removeItem(e) {
     const item = e.target;
-    this.#addItemToRightConatiner(item);
+    this.#addItemToRightContainer(item);
     item.remove();
   }
 

@@ -52,13 +52,13 @@ export default class ParentController {
    * @description call addNote Method for eachElement
    */
   addChildren(list) {
-    let newlist = [];
+    let newList = [];
     if (Array.isArray(list)) {
-      newlist = [...list];
-      newlist.forEach((val) => this.addChild(val));
+      newList = [...list];
+      newList.forEach((val) => this.addChild(val));
     } else if (!!list[Symbol.iterator]) {
-      newlist = [...list];
-      newlist.forEach((val) => this.addChild(val.innerText));
+      newList = [...list];
+      newList.forEach((val) => this.addChild(val.innerText));
     }
   }
 
@@ -91,7 +91,7 @@ export default class ParentController {
    * @param {HTMLElement} item
    * @description Clone a Node and append this Node to the <uI> element of right container
    */
-  #addItemToRightConatiner(item) {
+  #addItemToRightContainer(item) {
     const rightUl = document.getElementById("right_ul");
     let clonenode = item.cloneNode(true);
     clonenode.className = "displayitem";

@@ -39,7 +39,7 @@ export default class ParentController {
    * @param {HTMLElement} listItem
    * @description wrapped item inside <li> and add EventListener to each item.
    */
-  #addChild(node) {
+  addChild(node) {
     const list = document.createElement("li");
     this.#leftUl.append(list);
     list.className = "list_Item";
@@ -55,10 +55,10 @@ export default class ParentController {
     let newlist = [];
     if (Array.isArray(list)) {
       newlist = [...list];
-      newlist.forEach((val) => this.#addChild(val));
+      newlist.forEach((val) => this.addChild(val));
     } else if (!!list[Symbol.iterator]) {
       newlist = [...list];
-      newlist.forEach((val) => this.#addChild(val.innerText));
+      newlist.forEach((val) => this.addChild(val.innerText));
     }
   }
 

@@ -104,14 +104,14 @@ export default class ParentController {
    * @returns {HTMLCollectionOf<Element>}
    */
   getAllItems() {
-    const arr = [];
-    const listItems = this.#mainContainer.childNodes;
-    for (let i = 0; i < listItems.length; i++) {
-      arr.push(listItems[i].innerText);
-    }
-    console.log("arr", arr);
-    let items = arr[1].split("\n");
-    return items;
+    let arr = [];
+    const leftChild = this.#leftUl.childNodes;
+    const leftItems = this.#displayListItems(leftChild);
+
+    const rightChild = this.#rightUl.childNodes;
+    const rightItems = this.#displayListItems(rightChild);
+    arr = [...leftItems, ...rightItems];
+    return arr;
   }
 
   /**

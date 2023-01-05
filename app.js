@@ -16,6 +16,5 @@ const listItemContainer = addSource(mainContainer);
 
 listItemContainer.addChildren(arr);
 const allItem = listItemContainer.getAllItems();
-console.log("allItem", allItem);
 listItemContainer.getUnselectedItems();
 listItemContainer.getSelectedItems();

@@ -9,7 +9,7 @@ export default class ParentController {
   constructor(item) {
     if ((item === undefined) | (item === null))
       throw new Error("Item is not defind!");
-    if (!item instanceof HTMLElement)
+    if (!(item instanceof HTMLElement))
       throw new Error("Item is not HTML element!");
 
     this.#mainContainer = item;
@@ -39,12 +39,12 @@ export default class ParentController {
    * @param {HTMLElement} listItem
    * @description wrapped item inside <li> and add EventListener to each item.
    */
-  addChild(node) {
+  #addChild(node) {
     const list = document.createElement("li");
     this.#leftUl.append(list);
     list.className = "list_Item";
     list.innerHTML = node;
-    list.addEventListener("click", (e) => this.removeItem(e));
+    list.addEventListener("click", (e) => this.#removeItem(e));
   }
 
   /**
@@ -55,10 +55,10 @@ export default class ParentController {
     let newlist = [];
     if (Array.isArray(list)) {
       newlist = [...list];
-      newlist.forEach((val) => this.addChild(val));
+      newlist.forEach((val) => this.#addChild(val));
     } else if (!!list[Symbol.iterator]) {
       newlist = [...list];
-      newlist.forEach((val) => this.addChild(val.innerText));
+      newlist.forEach((val) => this.#addChild(val.innerText));
     }
   }
 
@@ -67,7 +67,7 @@ export default class ParentController {
    * @param {HTMLElement}
    * @description Clone a Node and append this Node to the <uI> element
    */
-  addItemToRightConatiner(item) {
+  #addItemToRightConatiner(item) {
     const rightUl = document.getElementById("right_ul");
     let clonenode = item.cloneNode(true);
     clonenode.className = "displayitem";
@@ -79,9 +79,9 @@ export default class ParentController {
    * @param {HTMLElement} e
    * @description remove a Node.
    */
-  removeItem(e) {
+  #removeItem(e) {
     const item = e.target;
-    this.addItemToRightConatiner(item);
+    this.#addItemToRightConatiner(item);
     item.remove();
   }
 
@@ -91,7 +91,7 @@ export default class ParentController {
    * @returns {HTMLCollectionOf<Element>}
    */
 
-  displayListItems(listItems) {
+  #displayListItems(listItems) {
     const arr = [];
     for (let i = 0; i < listItems.length; i++) {
       arr.push(listItems[i].innerText);
@@ -104,8 +104,13 @@ export default class ParentController {
    * @returns {HTMLCollectionOf<Element>}
    */
   getAllItems() {
+    const arr = [];
     const listItems = this.#mainContainer.childNodes;
-    const items = this.displayListItems(listItems);
+    for (let i = 0; i < listItems.length; i++) {
+      arr.push(listItems[i].innerText);
+    }
+    console.log("arr", arr);
+    let items = arr[1].split("\n");
     return items;
   }
 
@@ -114,7 +119,7 @@ export default class ParentController {
    */
   getUnselectedItems() {
     const listItems = this.#leftUl.childNodes;
-    const items = this.displayListItems(listItems);
+    const items = this.#displayListItems(listItems);
     return items;
   }
 
@@ -123,7 +128,7 @@ export default class ParentController {
    */
   getSelectedItems() {
     const listItems = this.#rightUl.childNodes;
-    const items = this.displayListItems(listItems);
+    const items = this.#displayListItems(listItems);
     return items;
   }
 }

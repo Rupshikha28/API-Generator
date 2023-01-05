@@ -14,8 +14,7 @@ const mainContainer = document.getElementById("main_container");
  */
 const listItemContainer = addSource(mainContainer);
 
-//listItemContainer.addChildren(arr);
+listItemContainer.addChildren(arr);
 const allItem = listItemContainer.getAllItems();
-listItemContainer.addChild("hello");
 listItemContainer.getUnselectedItems();
 listItemContainer.getSelectedItems();

@@ -36,7 +36,7 @@ export default class ParentController {
   }
 
   /**
-   * @param {HTMLElement} listItem
+   * @param {HTMLElement} node
    * @description wrapped item inside <li> and add EventListener to each item.
    */
   addChild(node) {
@@ -48,7 +48,7 @@ export default class ParentController {
   }
 
   /**
-   * @param {array || iterable}
+   * @param {array || iterable} list
    * @description call addNote Method for eachElement
    */
   addChildren(list) {

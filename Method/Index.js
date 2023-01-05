@@ -63,21 +63,46 @@ export default class ParentController {
   }
 
   /**
+   *  @param {HTMLElement} e
+   *  @description remove a node from right container.
+   */
+  #rightItemRemove(e) {
+    const item = e.target;
+    this.#addItemToLeftConatiner(item);
+    item.remove();
+  }
+
+  /**
    *
-   * @param {HTMLElement}
-   * @description Clone a Node and append this Node to the <uI> element
+   * @param {HTMLElement} item
+   * @description Clone a Node and append this Node to the <uI> element of Left container
+   */
+
+  #addItemToLeftConatiner(item) {
+    const leftUl = document.getElementById("left_ul");
+    let clonenode = item.cloneNode(true);
+    clonenode.className = "displayitem";
+    leftUl.append(clonenode);
+    clonenode.addEventListener("click", (e) => this.#removeItem(e));
+  }
+
+  /**
+   *
+   * @param {HTMLElement} item
+   * @description Clone a Node and append this Node to the <uI> element of right container
    */
   #addItemToRightConatiner(item) {
     const rightUl = document.getElementById("right_ul");
     let clonenode = item.cloneNode(true);
     clonenode.className = "displayitem";
     rightUl.append(clonenode);
+    clonenode.addEventListener("click", (e) => this.#rightItemRemove(e));
   }
 
   /**
    *
    * @param {HTMLElement} e
-   * @description remove a Node.
+   * @description remove a node from left container.
    */
   #removeItem(e) {
     const item = e.target;
